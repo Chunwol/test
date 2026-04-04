@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>1주차: 깐깐한 회원가입 폼</title>
+</head>
+<body>
+  <h2>자바스크립트 없이 폼 검사하기</h2>
+  
+  <form action="#">
+    <!-- 1. 필수 입력 (required) -->
+    <label>아이디 (필수):</label>
+    <input type="text" required placeholder="입력 안 하면 안 넘어감"><br><br>
+
+    <!-- 2. 글자 수 제한 (minlength, maxlength) -->
+    <label>비밀번호 (4~8자리):</label>
+    <input type="password" minlength="4" maxlength="8"><br><br>
+
+    <!-- 3. 이메일 형식 자동 검사 (type="email") -->
+    <label>이메일 (@ 필수):</label>
+    <input type="email"><br><br>
+
+    <!-- 4. 숫자 범위 제한 (min, max, step) -->
+    <label>나이 (10~20살만):</label>
+    <input type="number" min="10" max="20" step="1"><br><br>
+
+    <button type="submit">가입하기</button>
+  </form>
+</body>
+</html>
+</html>
