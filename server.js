@@ -2,6 +2,7 @@ const express = require('express');
 
 const app = express();
 const users = new Map();
+const vaccinationHistory = [];
 
 app.use(express.json());
 
@@ -37,18 +38,22 @@ app.post('/api/v1/auth/login', (request, response) => {
   });
 });
 
-app.get('/api/v1/users/:loginId', (request, response) => {
-  const user = users.get(request.params.loginId);
+app.post('/api/v1/vaccination-history', (request, response) => {
+  const { petId, vaccinationType, vaccinatedAt } = request.body;
 
-  if (!user) {
-    return response.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
+  if (!petId || !vaccinationType || !vaccinatedAt) {
+    return response.status(400).json({ message: '접종 완료 기록을 입력해 주세요.' });
   }
 
-  return response.json({
-    loginId: user.loginId,
-    name: user.name,
-    active: user.active
-  });
+  const record = {
+    id: vaccinationHistory.length + 1,
+    petId,
+    vaccinationType,
+    vaccinatedAt
+  };
+
+  vaccinationHistory.push(record);
+  return response.status(201).json(record);
 });
 
 const port = process.env.PORT || 3000;
